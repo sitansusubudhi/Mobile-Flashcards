@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 import {Container, Content, Card, CardItem, Text, Tab} from 'native-base';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
-import TabNavigator from './navigation/TabNavigator';
+import MainNavigator from './navigation/MainNavigator';
 
 
 export default class App extends Component {
@@ -16,7 +16,7 @@ export default class App extends Component {
           renderItem={({ item }) => <Item title={item.title} />}
           keyExtractor={item => item.id}
         /> */}
-        <TabNavigator />
+        <MainNavigator />
       </SafeAreaView>
     );
   }

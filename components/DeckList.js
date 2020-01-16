@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import  { getDecksData } from '../utils/api';
 import { AsyncStorage } from 'react-native';
 
@@ -16,6 +16,14 @@ class DeckList extends Component {
                         <View key={deck}>
                             <Text>{title}</Text>
                             <Text>{questions.length}</Text>
+
+                            <Button
+                                title="Show Deck"
+                                onPress={() => this.props.navigation.navigate(
+                                    'DeckView',
+                                    { entryId: deck }
+                                )}>
+                            </Button>
                         </View>
                     )
                 })}
