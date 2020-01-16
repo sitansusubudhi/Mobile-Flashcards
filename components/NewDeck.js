@@ -34,7 +34,8 @@ class NewDeck extends Component {
 
                 </TextInput>
                 <Button
-                    onPress={this.handleSubmit}>
+                    onPress={this.handleSubmit}
+                    title="submit">
 
                 </Button>
             </View>
