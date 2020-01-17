@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
 import { decksData, FLASHCARDS_STORAGE_KEY } from './_DATA';
 
 export function getDecksData() {

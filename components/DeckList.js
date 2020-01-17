@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import  { getDecksData } from '../utils/api';
+import  { getDecksData, getDecks } from '../utils/api';
 import { AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions';
 
 class DeckList extends Component {
+
+    componentDidMount() {
+        this.props.dispatch(handleInitialData());
+    }
+
     render() {
 
-        const decks = getDecksData();
+        const { decks } = this.props;
 
         return (
             <View style={styles.container}>
@@ -40,5 +47,14 @@ const styles = StyleSheet.create({
     }
   });
 
-export default DeckList;
+  
+function mapStateToProps(decks) {
+    
+    return {
+        decks
+    }
+}
+
+
+export default connect(mapStateToProps)(DeckList);
 

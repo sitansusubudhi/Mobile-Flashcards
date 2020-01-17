@@ -1,23 +1,28 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import {Container, Content, Card, CardItem, Text, Tab} from 'native-base';
+import { Container, Content, Card, CardItem, Text, Tab } from 'native-base';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import MainNavigator from './navigation/MainNavigator';
-
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+import middleware from './middleware';
 
 export default class App extends Component {
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        {/* <FlatList
+      <Provider store={createStore(reducer, middleware)}>
+        <SafeAreaView style={styles.container}>
+          {/* <FlatList
           data={DATA}
           renderItem={({ item }) => <Item title={item.title} />}
           keyExtractor={item => item.id}
         /> */}
-        <MainNavigator />
-      </SafeAreaView>
+          <MainNavigator />
+        </SafeAreaView>
+      </Provider>
     );
   }
 }
