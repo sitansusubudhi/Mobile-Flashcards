@@ -6,6 +6,7 @@ export function getDecksData() {
 }
 
 export function getDecks() {
+    // AsyncStorage.clear();
       return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
         .then(results => {
             if (results === null) {
@@ -19,7 +20,7 @@ export function getDecks() {
 export function saveDeckTitle(title) {
     return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
         [title]: {
-            title,
+            title: title,
             questions: []
         }
     }));

@@ -48,7 +48,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
   DeckView: {
     screen: DeckView,
     navigationOptions: ({ navigation }) => ({
-      title: 'Deck Details',
+      // title: 'Deck Details',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
