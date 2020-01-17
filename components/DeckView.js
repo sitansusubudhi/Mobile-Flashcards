@@ -23,7 +23,7 @@ class DeckView extends Component {
 
                 <TextButton 
                     styles={styles}
-                    text={'Add Card'}
+                    text={'New Card'}
                     color={purple}
                     onPress={() =>
                         this.props.navigation.navigate('NewCard', { entryId: title })

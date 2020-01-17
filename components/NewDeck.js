@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, View, Text, TextInput, StyleSheet } from 'react-native';
+import { Button, View, Text, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { saveDeckTitle } from '../utils/api';
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
-import { black } from '../utils/colors';
+import { black, gray } from '../utils/colors';
 
 class NewDeck extends Component {
 
@@ -30,7 +30,7 @@ class NewDeck extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <Text style={styles.title}>Deck name</Text>
                 <TextInput
                     style={styles.input}
@@ -44,7 +44,7 @@ class NewDeck extends Component {
                     title="submit">
 
                 </Button>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 };
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        borderColor: '#757575',
+        borderColor: gray,
         width: 200,
         height: 50,
         padding: 10,

@@ -6,7 +6,7 @@ export function getDecksData() {
 }
 
 export function getDecks() {
-    // AsyncStorage.clear();
+    //  AsyncStorage.clear();
       return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
         .then(results => {
             if (results === null) {
@@ -24,4 +24,13 @@ export function saveDeckTitle(title) {
             questions: []
         }
     }));
+}
+
+export function addCardToDeck(title, card) {
+    return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+        .then((results) => {
+            const decks = JSON.parse(results);
+            decks[title].questions.push(card);
+            AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks));
+        })
 }

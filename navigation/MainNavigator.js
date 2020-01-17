@@ -8,7 +8,7 @@ import { purple, white, black } from '../utils/colors';
 import DeckList from '../components/DeckList';
 import NewDeck from '../components/NewDeck';
 import DeckView from '../components/DeckView';
-
+import NewCard from '../components/NewCard';
 
 const Tabs = {
   DeckList: {
@@ -49,6 +49,16 @@ const MainNavigator = createAppContainer(createStackNavigator({
     screen: DeckView,
     navigationOptions: ({ navigation }) => ({
       // title: 'Deck Details',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    }),
+  },
+  NewCard: {
+    screen: NewCard,
+    navigationOptions: ({ navigation }) => ({
+      title: 'New Card',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
