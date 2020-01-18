@@ -18,23 +18,26 @@ class DeckView extends Component {
 
         return (
             <View style={styles.container}>
-                <Text>{decks[title].title}</Text>
-                <Text>{decks[title].questions.length}</Text>
 
-                <TextButton 
-                    styles={styles}
-                    text={'New Card'}
-                    color={purple}
-                    onPress={() =>
-                        this.props.navigation.navigate('NewCard', { entryId: title })
-                    }/>
-                <TextButton 
-                    styles={styles}
-                    text={'Start Quiz'}
-                    color={red}
-                    onPress={() =>
-                        this.props.navigation.navigate('QuizView', { entryId: title })
-                    }/>
+                <View style={styles.item}>
+                    <Text style={styles.title}>{decks[title].title}</Text>
+                    <Text style={styles.questions}>{decks[title].questions.length}</Text>
+
+                    <TextButton 
+                        styles={styles}
+                        text={'New Card'}
+                        color={purple}
+                        onPress={() =>
+                            this.props.navigation.navigate('NewCard', { entryId: title })
+                        }/>
+                    <TextButton 
+                        styles={styles}
+                        text={'Start Quiz'}
+                        color={red}
+                        onPress={() =>
+                            this.props.navigation.navigate('QuizView', { entryId: title })
+                        }/>
+                </View>
             </View>
         );
     }
@@ -59,6 +62,29 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: "center"
       },
+      item: {
+        borderRadius: 2,
+        padding: 20,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 17,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
+    },
+    title: {
+        fontSize: 40,
+    },
+    questions: {
+        fontSize: 30,
+        marginBottom: 150
+    }
 });
 
 function mapStateToProps(decks, { navigation } ) {
