@@ -9,10 +9,11 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { white, orange, gray } from '../utils/colors';
+import { black, white, orange, gray } from '../utils/colors';
 import { addCardToDeck } from '../utils/api';
 import { connect } from 'react-redux';
 import { addDeckCard } from '../actions';
+import TextButton from './TextButton';
 
 class NewCard extends Component {
 
@@ -59,12 +60,11 @@ class NewCard extends Component {
                         }))}>
                     </TextInput>
 
-                    <TouchableOpacity 
-                        style={styles.submitBtn}
-                        onPress={() => this.handleSubmit(deckTitle)}>
-
-                        <Text style={styles.submitBtnText}>Submit</Text>
-                    </TouchableOpacity>
+                    <TextButton 
+                        styles={styles}
+                        text={'Submit'}
+                        color={black}
+                        onPress={() => this.handleSubmit(deckTitle)}/>
                 </View>
             </KeyboardAvoidingView>
         );
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: gray
     },
-    submitBtn: {
+    AndroidSubmitBtn: {
         borderWidth: 0.5,
         borderColor: '#d6d7da',
         padding: 10,
@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: gray,
         width: 270,
-        height: 50,
+        height: 40,
         padding: 10,
-        margin: 50,
+        margin: 40,
         borderRadius: 8
     },
 });

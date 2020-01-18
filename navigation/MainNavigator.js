@@ -51,7 +51,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
       // title: 'Deck Details',
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: black,
       },
     }),
   },
@@ -61,7 +61,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
       title: 'New Card',
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: black,
       },
     }),
   }

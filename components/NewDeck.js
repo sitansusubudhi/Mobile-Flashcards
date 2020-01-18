@@ -3,7 +3,8 @@ import { Button, View, Text, TextInput, StyleSheet, KeyboardAvoidingView } from 
 import { saveDeckTitle } from '../utils/api';
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
-import { black, gray } from '../utils/colors';
+import { black, gray, white } from '../utils/colors';
+import TextButton from './TextButton';
 
 class NewDeck extends Component {
 
@@ -38,12 +39,11 @@ class NewDeck extends Component {
                     onChangeText={this.handleChange}>
 
                 </TextInput>
-                <Button
-                    style={styles.submitBtn}
-                    onPress={this.handleSubmit}
-                    title="submit">
-
-                </Button>
+                <TextButton 
+                        styles={styles}
+                        text={'Submit'}
+                        color={black}
+                        onPress={this.handleSubmit}/>
             </KeyboardAvoidingView>
         );
     }
@@ -68,13 +68,18 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#333'
     },
-    submitBtn: {
+    AndroidSubmitBtn: {
         borderWidth: 0.5,
         borderColor: '#d6d7da',
         padding: 10,
         borderRadius: 7,
         overflow: 'hidden'
-    }
+    },
+    submitBtnText: {
+        color: white,
+        fontSize: 22,
+        textAlign: 'center'
+    },
 });
 
 export default connect()(NewDeck);
