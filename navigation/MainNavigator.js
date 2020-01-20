@@ -9,6 +9,7 @@ import DeckList from '../components/DeckList';
 import NewDeck from '../components/NewDeck';
 import DeckView from '../components/DeckView';
 import NewCard from '../components/NewCard';
+import QuizView from '../components/QuizView';
 
 const Tabs = {
   DeckList: {
@@ -59,6 +60,16 @@ const MainNavigator = createAppContainer(createStackNavigator({
     screen: NewCard,
     navigationOptions: ({ navigation }) => ({
       title: 'New Card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+    }),
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: ({ navigation }) => ({
+      // title: 'Quiz ',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: black,

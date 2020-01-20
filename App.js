@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
 import { black, gray, whitepurple, white, blue } from './utils/colors';
+import QuizView from './components/QuizView';
+import ShowAnswer from './components/QuizQuestion';
 
 function DeckStatusBar ({backgroundColor, ...props}) {
   return (

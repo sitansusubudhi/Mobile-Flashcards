@@ -21,19 +21,26 @@ class DeckList extends Component {
                 {Object.keys(decks).map((deck) => {
                     const { title, questions } = decks[deck];
                     return (
-                        <View key={deck} style={styles.item}>
+                        <TouchableOpacity
+                            key={deck} 
+                            onPress={() => this.props.navigation.navigate(
+                                'DeckView',
+                                { entryId: deck }
+                            )}>
+                        <View style={styles.item}>
                             <Text style={styles.itemText}>{title}</Text>
                             <Text style={styles.itemText}>{questions.length}</Text>
 
-                            <Button
+                            {/* <Button
                                 style={styles.itemBtn}
                                 title="Show Deck"
                                 onPress={() => this.props.navigation.navigate(
                                     'DeckView',
                                     { entryId: deck }
                                 )}>
-                            </Button>
+                            </Button> */}
                         </View>
+                        </TouchableOpacity>
                     )
                 })}
             </View>
