@@ -27,11 +27,18 @@ class NewDeck extends Component {
         const { title } = this.state;
 
         if (title.trim()) {
+            // Save Deck data locally using api helper
             saveDeckTitle(title);
+
+            // Dispatch addDeck action creator
             this.props.dispatch(addDeck(title));
+
+            // Update component state
             this.setState(() => ({
                 title: ''
             }));
+
+            // Go back to DeckView
             this.props.navigation.navigate('DeckView', { entryId: title });
         } else {
             alert(`Can't create Deck with blank value`);
@@ -42,6 +49,7 @@ class NewDeck extends Component {
     }
 
     render() {
+
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <Text style={styles.title}>Deck name</Text>
@@ -94,5 +102,6 @@ const styles = StyleSheet.create({
     },
 });
 
+// Connects the NewDeck component to the Redux store.
 export default connect()(NewDeck);
 

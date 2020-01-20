@@ -57,7 +57,7 @@ class QuizView extends Component {
 
     componentDidMount(){
         clearLocalNotification()
-        .then(setLocalNotification)
+        .then(setLocalNotification);
     }
     
     state = {
@@ -69,13 +69,14 @@ class QuizView extends Component {
 
     
     handleToggleSwitch = () => {
+        // Toggle Switch value
         this.setState((state) => ({
             showAnswer: !state.showAnswer,
         }));
     };
 
     handleSubmitAnswer = (answer) => {
-
+        // Keep track of questions for which Option correct has been clicked
         if (answer === CORRECT) {
             this.setState((prevState) => ({
                 correct: prevState.correct + 1
@@ -93,6 +94,7 @@ class QuizView extends Component {
     };
 
     restartQuiz = () => {
+        // Start quiz from questionId 0
         this.setState(() => ({
             showAnswer: false,
             questionId: 0,
@@ -102,6 +104,7 @@ class QuizView extends Component {
     };
 
     goBack = () => {
+        // Go back to previous view
         this.props.navigation.dispatch(NavigationActions.back({ key: null }));
     };
 
@@ -110,6 +113,7 @@ class QuizView extends Component {
         const deckTitle = this.props.navigation.state.params.entryId;
         const { questionId, showAnswer, correct, incorrect } = this.state;
 
+        // If there does not exist any question for the deck, display instruction to add card.
         if (decks[deckTitle].questions.length === 0) {
             return (
                 <View style={styles.container}>
@@ -119,6 +123,7 @@ class QuizView extends Component {
             );
         }
 
+        // If questionId reaches the end of the questions array, display ResultView component and pass in required props.
         if (questionId === decks[deckTitle].questions.length) {
             return (<ResultView 
                         deckTitle={deckTitle} 
@@ -132,26 +137,41 @@ class QuizView extends Component {
         return (
             <View style={styles.container}>
 
+                {/**
+                 * Display Question Number and Total number of Questions
+                 */}
                 <Text style={styles.questionId}>
                     {`Question ${questionId + 1} of ${decks[deckTitle].questions.length}`}
                 </Text>
 
                 <View style={styles.item}>
-
+                    
+                    {/**
+                     * Display Question text
+                     */}
                     <View style={styles.container}>
                         <Text style={styles.question}>
                             {question}
                         </Text>
 
+                        {/**
+                         * Show Label for the Switch Button
+                         */}
                         <Text style={{ marginTop: 30 }}>
                             {this.state.showAnswer ? 'Hide Answer' : 'Show Answer'}
                         </Text>
 
+                        {/**
+                         * Switch Button to show Answer on toggle
+                         */}
                         <Switch
                             style={{ marginBottom: 25 }}
                             value={showAnswer}
                             onValueChange={this.handleToggleSwitch}
                         />
+                        {/**
+                         * Display Answer only when showAnswer is true
+                         */}
                         {showAnswer === true && (
                             <Text style={styles.answer}>
                                 {answer}
@@ -160,11 +180,17 @@ class QuizView extends Component {
                     </View>
 
                     <View style={styles.buttonContainer}>
+                        {/**
+                         * Correct Button
+                         */}
                         <TextButton
                             styles={styles}
                             text={CORRECT}
                             color={green}
                             onPress={() => this.handleSubmitAnswer(CORRECT)} />
+                        {/**
+                         * Incorrect Button
+                         */}
                         <TextButton
                             styles={styles}
                             text={INCORRECT}
@@ -232,10 +258,12 @@ const styles = StyleSheet.create({
     }
 });
 
+// Returns decks as props to the QuizView Component.
 function mapStateToProps(decks) {
-
     return {
         decks
-    }
+    };
 }
+
+// Connects the QuizView component to the Redux store.
 export default connect(mapStateToProps)(QuizView);

@@ -25,11 +25,14 @@ const Deck = ({title, questions, onPress }) => (
 
 class DeckList extends Component {
 
+    // Use props.dispatch (received by connected component) to dispatch action for fetching initial data
     componentDidMount() {
         this.props.dispatch(handleInitialData());
     }
 
     navigateToDeck = (deck) => {
+        
+        // Specify which Screen to display based on the Deck selected. Pass in the Deck title as parameter for 'entryId'
         this.props.navigation.navigate(
             'DeckView',
             { entryId: deck }
@@ -39,12 +42,22 @@ class DeckList extends Component {
     render() {
 
         const { decks } = this.props;
+
+        // Sort Decks in the descending order of number of questions
+        // Populate DATA to be used in FlatList
         const DATA = Object.keys(decks).map(deck => ({
             title: decks[deck].title,
             questions: decks[deck].questions.length
         })).sort((a, b) => b.questions - a.questions);
+
         return (
             <View style={styles.container}>
+                
+                {/**
+                 * FlatList would be efficient for handling infinite lists. 
+                 * Use item.title as the id for the react keys.
+                 * Render Deck Component defined above. And pass in the required props.
+                 */}
                 <FlatList
                     data={DATA}
                     renderItem={({ item }) => <Deck 
@@ -90,13 +103,13 @@ const styles = StyleSheet.create({
     }
 });
 
-
+// Returns decks as props to the DeckList Component.
 function mapStateToProps(decks) {
     return {
         decks
     }
 }
 
-
+// Connects the DeckList component to the Redux store.
 export default connect(mapStateToProps)(DeckList);
 

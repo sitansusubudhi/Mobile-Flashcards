@@ -23,8 +23,14 @@ class NewCard extends Component {
         const { question, answer } = this.state;
 
         if (question.trim() && answer.trim()) {
+
+            // Save Card data locally using api helper
             addCardToDeck(deck, { question, answer });
+
+            // Dispatch addDeckCard action creator
             this.props.dispatch(addDeckCard({ deck, question, answer }));
+
+            // Update component state
             this.setState(() => ({
                 question: '',
                 answer: ''
@@ -44,31 +50,38 @@ class NewCard extends Component {
         return (
             <View behavior='padding' style={styles.container}>
                 <View style={styles.container}>
-                        <Text style={styles.title}>What is the question?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={this.state.question}
-                            onChangeText={(question) => this.setState(() => ({
-                                question
-                            }))}>
-                        </TextInput>
+                    {/**
+                     * Question Input
+                     */}
+                    <Text style={styles.title}>What is the question?</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={this.state.question}
+                        onChangeText={(question) => this.setState(() => ({
+                            question
+                        }))}>
+                    </TextInput>
+                    
+                    {/**
+                     * Answer Input
+                     */}
+                    <Text style={styles.title}>Type in the answer </Text>
+                    <TextInput
+                        style={styles.input}
+                        value={this.state.answer}
+                        onChangeText={(answer) => this.setState(() => ({
+                            answer
+                        }))}>
+                    </TextInput>
+                </View>
 
-                        <Text style={styles.title}>Type in the answer </Text>
-                        <TextInput
-                            style={styles.input}
-                            value={this.state.answer}
-                            onChangeText={(answer) => this.setState(() => ({
-                                answer
-                            }))}>
-                        </TextInput>
-                    </View>
-                    <View style={styles.container}>
-                        <TextButton
-                            styles={styles}
-                            text={'Submit'}
-                            color={black}
-                            onPress={() => this.handleSubmit(deckTitle)} />
-                    </View>
+                <View style={styles.container}>
+                    <TextButton
+                        styles={styles}
+                        text={'Submit'}
+                        color={black}
+                        onPress={() => this.handleSubmit(deckTitle)} />
+                </View>
             </View>
         );
     }
@@ -108,4 +121,5 @@ const styles = StyleSheet.create({
     },
 });
 
+// Connects the NewCard component to the Redux store.
 export default connect()(NewCard);

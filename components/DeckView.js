@@ -14,8 +14,13 @@ import {
 } from '../utils/colors';
 
 class DeckView extends Component {
+
+    //Specify header of the DeckView based on the Deck title 
     static navigationOptions = ({ navigation }) => {
+
+        // Retrieve the entryId from the current route
         const { entryId } = navigation.state.params;
+
         return {
             title: entryId
         };
@@ -33,7 +38,9 @@ class DeckView extends Component {
                         style={styles.questions}>
                             {decks[title].questions.length} {decks[title].questions.length === 1 ? 'card': 'cards'}
                     </Text>
-
+                    {/**
+                     * Allow user to Add a New Card to current Deck. Navigate to NewCard on click on the button.
+                     */}
                     <TextButton 
                         styles={styles}
                         text={'Add Card'}
@@ -41,6 +48,9 @@ class DeckView extends Component {
                         onPress={() =>
                             this.props.navigation.navigate('NewCard', { entryId: title })
                         }/>
+                    {/**
+                     * Allow user to Start a Quiz for current Deck. Navigate to QuizView on click on the button.
+                     */}
                     <TextButton 
                         styles={styles}
                         text={'Start a Quiz'}
@@ -99,13 +109,16 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks, { navigation } ) {
+
+    // Retrieve the entryId from the current route
     const { entryId } = navigation.state.params;
 
+    // The Decks and the current Deck Title get passed as props to DeckView
     return {
         decks,
         title: entryId
     }
 }
 
-
+// Connects the DeckView component to the Redux store.
 export default connect(mapStateToProps)(DeckView);
