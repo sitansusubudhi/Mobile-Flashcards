@@ -1,4 +1,5 @@
-export const FLASHCARDS_STORAGE_KEY = 'Flashcards:decks'
+export const FLASHCARDS_STORAGE_KEY = 'Flashcards:decks';
+export const FLASHCARDS_NOTIFICATION_KEY = 'Flashcards:notifications';
 
 export const decksData = {
     React: {

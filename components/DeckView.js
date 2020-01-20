@@ -3,7 +3,7 @@ import { Button, View, Text, TextInput, StyleSheet } from 'react-native';
 import { getDecksData } from '../utils/api';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { purple, white, red } from '../utils/colors';
+import { purple, white, red, lightPurp, green, orange } from '../utils/colors';
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -25,15 +25,15 @@ class DeckView extends Component {
 
                     <TextButton 
                         styles={styles}
-                        text={'New Card'}
-                        color={purple}
+                        text={'Add Card'}
+                        color={orange}
                         onPress={() =>
                             this.props.navigation.navigate('NewCard', { entryId: title })
                         }/>
                     <TextButton 
                         styles={styles}
-                        text={'Start Quiz'}
-                        color={red}
+                        text={'Start a Quiz'}
+                        color={green}
                         onPress={() =>
                             this.props.navigation.navigate('QuizView', { entryId: title })
                         }/>

@@ -30,10 +30,10 @@ const Tabs = {
 
 const navigationOptions = {
   tabBarOptions: {
-    activeTintColor: black,
+    activeTintColor: white,
     style: {
       height: 50,
-      backgroundColor: white,
+      backgroundColor: black,
     }
   }
 };

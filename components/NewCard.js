@@ -38,42 +38,40 @@ class NewCard extends Component {
             alert(`Can't create card with blank Question or Answer`);
             return;
         }
-
-
-        
     }
 
     render() {
         const deckTitle = this.props.navigation.state.params.entryId;
 
         return (
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+            <View behavior='padding' style={styles.container}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>What is the question?</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={this.state.question}
-                        onChangeText={(question) => this.setState(() => ({
-                            question
-                        }))}>
-                    </TextInput>
+                        <Text style={styles.title}>What is the question?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={this.state.question}
+                            onChangeText={(question) => this.setState(() => ({
+                                question
+                            }))}>
+                        </TextInput>
 
-                    <Text style={styles.title}>Type in the answer </Text>
-                    <TextInput
-                        style={styles.input}
-                        value={this.state.answer}
-                        onChangeText={(answer) => this.setState(() => ({
-                            answer
-                        }))}>
-                    </TextInput>
-
-                    <TextButton
-                        styles={styles}
-                        text={'Submit'}
-                        color={black}
-                        onPress={() => this.handleSubmit(deckTitle)} />
-                </View>
-            </KeyboardAvoidingView>
+                        <Text style={styles.title}>Type in the answer </Text>
+                        <TextInput
+                            style={styles.input}
+                            value={this.state.answer}
+                            onChangeText={(answer) => this.setState(() => ({
+                                answer
+                            }))}>
+                        </TextInput>
+                    </View>
+                    <View style={styles.container}>
+                        <TextButton
+                            styles={styles}
+                            text={'Submit'}
+                            color={black}
+                            onPress={() => this.handleSubmit(deckTitle)} />
+                    </View>
+            </View>
         );
     }
 }
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     title: {
-        fontSize: 30,
+        fontSize: 25,
         color: gray
     },
     AndroidSubmitBtn: {
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
         width: 270,
         height: 40,
         padding: 10,
-        margin: 40,
+        margin: 20,
         borderRadius: 8
     },
 });

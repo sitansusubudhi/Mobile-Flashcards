@@ -85,6 +85,14 @@ class QuizView extends Component {
         const deckTitle = this.props.navigation.state.params.entryId;
         const { questionId, showAnswer, correct, incorrect } = this.state;
 
+        if (decks[deckTitle].questions.length === 0) {
+            return (
+                <View style={styles.container}>
+                    <Text style={{fontSize: 20}}>There are no Cards in this Deck.</Text>
+                    <Text style={{fontSize: 20}}>Click on Add Card to create a new card.</Text>
+                </View>
+            );
+        }
 
         if (questionId === decks[deckTitle].questions.length) {
             return <ResultView 

@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
+import { setLocalNotification, clearLocalNotification } from './utils/helpers';
 
 function DeckStatusBar ({backgroundColor, ...props}) {
   return (
@@ -16,6 +17,11 @@ function DeckStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends Component {
+ 
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>

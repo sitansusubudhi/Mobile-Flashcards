@@ -1,38 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
-import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { red, orange, blue, lightPurp, pink, white } from './colors';
-import { Notifications, Permissions } from 'expo';
-
-const NOTIFICATION_KEY = 'UdaciFitness:notifications'
-
-export function getDailyReminderValue () {
-  return {
-    today: "👋 Don't forget to log your data today!"
-  }
-}
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    padding: 5,
-    borderRadius: 8,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 20
-  },
-})
-
-export function clearLocalNotification () {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
-}
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+import { FLASHCARDS_NOTIFICATION_KEY } from './_DATA';
 
 function createNotification () {
   return {
-    title: 'Log your stats!',
-    body: "👋 don't forget to log your stats for today!",
+    title: 'Learn new terms!',
+    body: "👋 Don't forget to practice today!",
     ios: {
       sound: true,
     },
@@ -42,23 +17,26 @@ function createNotification () {
       sticky: false,
       vibrate: true,
     }
-  }
+  };
 }
 
 export function setLocalNotification () {
-  AsyncStorage.getItem(NOTIFICATION_KEY)
+  AsyncStorage.getItem(FLASHCARDS_NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
           .then(({ status }) => {
             if (status === 'granted') {
-              Notifications.cancelAllScheduledNotificationsAsync()
+              Notifications.cancelAllScheduledNotificationsAsync();
 
-              let tomorrow = new Date()
-              tomorrow.setDate(tomorrow.getDate() + 1)
-              tomorrow.setHours(20)
-              tomorrow.setMinutes(0)
+              let tomorrow = new Date();
+              // tomorrow.setTime(tomorrow.getTime() + 1 * 10000);
+              // console.log('Local notification ', tomorrow);
+
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              tomorrow.setHours(6);
+              tomorrow.setMinutes(0);
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
@@ -66,11 +44,16 @@ export function setLocalNotification () {
                   time: tomorrow,
                   repeat: 'day',
                 }
-              )
+              );
 
-              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+              AsyncStorage.setItem(FLASHCARDS_NOTIFICATION_KEY, JSON.stringify(true));
             }
-          })
+          });
       }
-    })
+    });
+}
+
+export function clearLocalNotification () {
+  return AsyncStorage.removeItem(FLASHCARDS_NOTIFICATION_KEY)
+    .then(Notifications.cancelAllScheduledNotificationsAsync);
 }
