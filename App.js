@@ -29,7 +29,7 @@ export default class App extends Component {
           renderItem={({ item }) => <Item title={item.title} />}
           keyExtractor={item => item.id}
         /> */}
-          <DeckStatusBar backgroundColor={black} barStyle="light-content" />
+          {/* <DeckStatusBar backgroundColor={black} barStyle="light-content" /> */}
           <MainNavigator />
         </View>
       </Provider>

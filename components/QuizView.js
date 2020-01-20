@@ -9,7 +9,7 @@ import { NavigationActions } from 'react-navigation';
 const CORRECT = 'Correct';
 const INCORRECT = 'Incorrect';
 
-const ResultView = ({ deckTitle, correct, incorrect }) => (
+const ResultView = ({ correct, incorrect, restartQuiz, goBack }) => (
     <View style={styles.container}>
             <Text style={styles.answer}>No of FlashCards - {correct + incorrect}</Text>
             <Text style={styles.answer}>Correctly answered - {correct}</Text>
@@ -17,12 +17,12 @@ const ResultView = ({ deckTitle, correct, incorrect }) => (
                 styles={styles}
                 text={'Restart Quiz'}
                 color={black}
-            />
+                onPress={restartQuiz}/>
             <TextButton
                 styles={styles}
                 text={'Back to Deck'}
                 color={black}
-            />
+                onPress={goBack}/>
     </View>
 );
 
@@ -40,7 +40,7 @@ class QuizView extends Component {
         showAnswer: false,
         questionId: 0,
         correct: 0,
-        incorrect: 0
+        incorrect: 0,
     };
 
     handleToggleSwitch = () => {
@@ -67,6 +67,19 @@ class QuizView extends Component {
         }));
     };
 
+    restartQuiz = () => {
+        this.setState(() => ({
+            showAnswer: false,
+            questionId: 0,
+            correct: 0,
+            incorrect: 0
+        }));
+    };
+
+    goBack = () => {
+        this.props.navigation.dispatch(NavigationActions.back({ key: null }));
+    };
+
     render() {
         const { decks } = this.props;
         const deckTitle = this.props.navigation.state.params.entryId;
@@ -74,7 +87,12 @@ class QuizView extends Component {
 
 
         if (questionId === decks[deckTitle].questions.length) {
-            return <ResultView deckTitle={deckTitle} correct={correct} incorrect={incorrect} />;
+            return <ResultView 
+                        deckTitle={deckTitle} 
+                        correct={correct} 
+                        incorrect={incorrect} 
+                        restartQuiz={this.restartQuiz}
+                        goBack={this.goBack}/>;
         }
 
         const { question, answer } = decks[deckTitle].questions[questionId];
