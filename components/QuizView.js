@@ -16,6 +16,7 @@ import {
     gray
 } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 const CORRECT = 'Correct';
 const INCORRECT = 'Incorrect';
@@ -54,6 +55,11 @@ class QuizView extends Component {
         };
     };
 
+    componentDidMount(){
+        clearLocalNotification()
+        .then(setLocalNotification)
+    }
+    
     state = {
         showAnswer: false,
         questionId: 0,
@@ -61,6 +67,7 @@ class QuizView extends Component {
         incorrect: 0,
     };
 
+    
     handleToggleSwitch = () => {
         this.setState((state) => ({
             showAnswer: !state.showAnswer,
@@ -135,7 +142,7 @@ class QuizView extends Component {
                         <Text style={styles.question}>
                             {question}
                         </Text>
-                        
+
                         <Text style={{ marginTop: 30 }}>
                             {this.state.showAnswer ? 'Hide Answer' : 'Show Answer'}
                         </Text>
