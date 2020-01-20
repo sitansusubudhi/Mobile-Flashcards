@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "Flashcards",
+    "name": "Mobile Flashcards",
+    "description": "The app allows users to create different categories of flashcards, add flashcards to these decks, then take quizzes on those decks.",
     "slug": "mobile-flashcards",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -11,11 +12,14 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons8-note-64.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "notification": {
+      "icon": "./assets/icons8-red-card-16.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,6 +29,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "org.sksubudhi.flashcards"
     }
   }
 }
