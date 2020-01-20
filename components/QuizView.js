@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, Switch, StyleSheet } from 'react-native';
 import { getDecksData } from '../utils/api';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { purple, white, red, green, orange, gray } from '../utils/colors';
+import { black, purple, white, red, green, orange, gray } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
-import QuizQuestion from './QuizQuestion';
+
+const CORRECT = 'Correct';
+const INCORRECT = 'Incorrect';
+
+const ResultView = ({ deckTitle, correct, incorrect }) => (
+    <View style={styles.container}>
+            <Text style={styles.answer}>No of FlashCards - {correct + incorrect}</Text>
+            <Text style={styles.answer}>Correctly answered - {correct}</Text>
+            <TextButton
+                styles={styles}
+                text={'Restart Quiz'}
+                color={black}
+            />
+            <TextButton
+                styles={styles}
+                text={'Back to Deck'}
+                color={black}
+            />
+    </View>
+);
 
 class QuizView extends Component {
 
@@ -18,36 +37,84 @@ class QuizView extends Component {
     };
 
     state = {
-        questionId: 0
+        showAnswer: false,
+        questionId: 0,
+        correct: 0,
+        incorrect: 0
+    };
+
+    handleToggleSwitch = () => {
+        this.setState((state) => ({
+            showAnswer: !state.showAnswer,
+        }));
+    };
+
+    handleSubmitAnswer = (answer) => {
+
+        if (answer === CORRECT) {
+            this.setState((prevState) => ({
+                correct: prevState.correct + 1
+            }));
+        } else {
+            this.setState((prevState) => ({
+                incorrect: prevState.incorrect + 1
+            }));
+        }
+
+        this.setState((prevState) => ({
+            questionId: prevState.questionId + 1,
+            showAnswer: false
+        }));
     };
 
     render() {
         const { decks } = this.props;
         const deckTitle = this.props.navigation.state.params.entryId;
-        const { questionId }  = this.state;
+        const { questionId, showAnswer, correct, incorrect } = this.state;
+
+
+        if (questionId === decks[deckTitle].questions.length) {
+            return <ResultView deckTitle={deckTitle} correct={correct} incorrect={incorrect} />;
+        }
+
         const { question, answer } = decks[deckTitle].questions[questionId];
         return (
             <View style={styles.container}>
 
                 <Text style={styles.questionId}>
-                        {`Question ${questionId+1} of ${decks[deckTitle].questions.length}`}
+                    {`Question ${questionId + 1} of ${decks[deckTitle].questions.length}`}
                 </Text>
 
                 <View style={styles.item}>
-                    
-                    <QuizQuestion question={question} answer={answer} />
+
+                    <View style={styles.container}>
+                        <Text style={styles.question}>
+                            {question}
+                        </Text>
+                        <Text style={{ marginTop: 30 }}>{this.state.showAnswer ? 'Hide Answer' : 'Show Answer'}</Text>
+                        <Switch
+                            style={{ marginBottom: 25 }}
+                            value={showAnswer}
+                            onValueChange={this.handleToggleSwitch}
+                        />
+                        {showAnswer === true && (
+                            <Text style={styles.answer}>
+                                {answer}
+                            </Text>
+                        )}
+                    </View>
 
                     <View style={styles.buttonContainer}>
-                        <TextButton 
-                                styles={styles}
-                                text={'Correct'}
-                                color={green}
-                                onPress={() => this.handleSubmit(deckTitle)}/>
-                        <TextButton 
-                                styles={styles}
-                                text={'Incorrect'}
-                                color={red}
-                                onPress={() => this.handleSubmit(deckTitle)}/>
+                        <TextButton
+                            styles={styles}
+                            text={CORRECT}
+                            color={green}
+                            onPress={() => this.handleSubmitAnswer(CORRECT)} />
+                        <TextButton
+                            styles={styles}
+                            text={INCORRECT}
+                            color={red}
+                            onPress={() => this.handleSubmitAnswer(INCORRECT)} />
                     </View>
                 </View>
             </View>
@@ -93,6 +160,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         margin: 5,
         position: 'absolute'
+    },
+    answer: {
+        width: 270,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: gray,
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    },
+    question: {
+        fontSize: 40,
+        marginTop: 60,
+        textAlign: 'center'
     }
 });
 
