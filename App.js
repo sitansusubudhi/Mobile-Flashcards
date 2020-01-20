@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, StatusBar, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import DeckList from './components/DeckList';
-import NewDeck from './components/NewDeck';
 import MainNavigator from './navigation/MainNavigator';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
-import { black, gray, whitepurple, white, blue } from './utils/colors';
-import QuizView from './components/QuizView';
 
 function DeckStatusBar ({backgroundColor, ...props}) {
   return (
@@ -24,11 +20,6 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducer, middleware)}>
         <View style={styles.container}>
-          {/* <FlatList
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} />}
-          keyExtractor={item => item.id}
-        /> */}
           {/* <DeckStatusBar backgroundColor={black} barStyle="light-content" /> */}
           <MainNavigator />
         </View>

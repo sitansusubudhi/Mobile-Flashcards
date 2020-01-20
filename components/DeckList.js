@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { getDecksData, getDecks } from '../utils/api';
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions';
 import { orange, white } from '../utils/colors';
+
+
+const Deck = ({title, questions, onPress }) => (
+    <View style={styles.container}>
+        <TouchableOpacity
+            onPress={onPress}>
+            <View style={styles.item}>
+                <Text style={styles.itemText}>{title}</Text>
+                <Text style={styles.itemText}>{questions} {questions === 1 ? 'card' : 'cards'}</Text>
+            </View>
+        </TouchableOpacity>
+    </View>
+);
 
 class DeckList extends Component {
 
@@ -12,37 +25,29 @@ class DeckList extends Component {
         this.props.dispatch(handleInitialData());
     }
 
+    navigateToDeck = (deck) => {
+        this.props.navigation.navigate(
+            'DeckView',
+            { entryId: deck }
+        );
+    };
+
     render() {
 
         const { decks } = this.props;
-
+        const DATA = Object.keys(decks).map(deck => ({
+            title: decks[deck].title,
+            questions: decks[deck].questions.length
+        })).sort((a, b) => b.questions - a.questions);
         return (
             <View style={styles.container}>
-                {Object.keys(decks).map((deck) => {
-                    const { title, questions } = decks[deck];
-                    return (
-                        <TouchableOpacity
-                            key={deck} 
-                            onPress={() => this.props.navigation.navigate(
-                                'DeckView',
-                                { entryId: deck }
-                            )}>
-                        <View style={styles.item}>
-                            <Text style={styles.itemText}>{title}</Text>
-                            <Text style={styles.itemText}>{questions.length}</Text>
-
-                            {/* <Button
-                                style={styles.itemBtn}
-                                title="Show Deck"
-                                onPress={() => this.props.navigation.navigate(
-                                    'DeckView',
-                                    { entryId: deck }
-                                )}>
-                            </Button> */}
-                        </View>
-                        </TouchableOpacity>
-                    )
-                })}
+                <FlatList
+                    data={DATA}
+                    renderItem={({ item }) => <Deck 
+                                                title={item.title}
+                                                questions={item.questions}
+                                                onPress={() => this.navigateToDeck(item.title)}/>}
+                    keyExtractor={item => item.title} />
             </View>
         );
     }

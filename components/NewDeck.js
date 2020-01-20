@@ -20,12 +20,19 @@ class NewDeck extends Component {
 
     handleSubmit = () => {
         const { title } = this.state;
-        saveDeckTitle(title);
-        this.props.dispatch(addDeck(title));
-        this.setState(() => ({
-            title: ''
-        }));
-        this.props.navigation.navigate('DeckView', { entryId: title });
+
+        if (title.trim()) {
+            saveDeckTitle(title);
+            this.props.dispatch(addDeck(title));
+            this.setState(() => ({
+                title: ''
+            }));
+            this.props.navigation.navigate('DeckView', { entryId: title });
+        } else {
+            alert(`Can't create Deck with blank value`);
+            return;
+        }
+        
 
     }
 

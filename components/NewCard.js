@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { 
+import {
     Button,
     View,
     Text,
@@ -25,25 +25,32 @@ class NewCard extends Component {
     handleSubmit = (deck) => {
         const { question, answer } = this.state;
 
-        addCardToDeck(deck, { question, answer });
-        this.props.dispatch(addDeckCard({ deck, question, answer }));
-        this.setState(() => ({
-            question: '',
-            answer: ''
-        }));
+        if (question.trim() && answer.trim()) {
+            addCardToDeck(deck, { question, answer });
+            this.props.dispatch(addDeckCard({ deck, question, answer }));
+            this.setState(() => ({
+                question: '',
+                answer: ''
+            }));
+            // Go back to previous view
+            this.props.navigation.dispatch(NavigationActions.back({ key: null }));
+        } else {
+            alert(`Can't create card with blank Question or Answer`);
+            return;
+        }
 
-        // Go back to previous view
-        this.props.navigation.dispatch(NavigationActions.back({ key: null }));
+
+        
     }
 
     render() {
         const deckTitle = this.props.navigation.state.params.entryId;
-        
+
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <View style={styles.container}>
                     <Text style={styles.title}>What is the question?</Text>
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         value={this.state.question}
                         onChangeText={(question) => this.setState(() => ({
@@ -52,7 +59,7 @@ class NewCard extends Component {
                     </TextInput>
 
                     <Text style={styles.title}>Type in the answer </Text>
-                    <TextInput 
+                    <TextInput
                         style={styles.input}
                         value={this.state.answer}
                         onChangeText={(answer) => this.setState(() => ({
@@ -60,11 +67,11 @@ class NewCard extends Component {
                         }))}>
                     </TextInput>
 
-                    <TextButton 
+                    <TextButton
                         styles={styles}
                         text={'Submit'}
                         color={black}
-                        onPress={() => this.handleSubmit(deckTitle)}/>
+                        onPress={() => this.handleSubmit(deckTitle)} />
                 </View>
             </KeyboardAvoidingView>
         );

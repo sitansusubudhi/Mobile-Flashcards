@@ -21,7 +21,7 @@ class DeckView extends Component {
 
                 <View style={styles.item}>
                     <Text style={styles.title}>{decks[title].title}</Text>
-                    <Text style={styles.questions}>{decks[title].questions.length}</Text>
+                    <Text style={styles.questions}>{decks[title].questions.length} {decks[title].questions.length === 1 ? 'card': 'cards'}</Text>
 
                     <TextButton 
                         styles={styles}
