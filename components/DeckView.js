@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { Button, View, Text, TextInput, StyleSheet } from 'react-native';
-import { getDecksData } from '../utils/api';
+import {
+    View,
+    Text,
+    StyleSheet
+} from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { purple, white, red, lightPurp, green, orange } from '../utils/colors';
+import { 
+    purple,
+    white,
+    green,
+    orange
+} from '../utils/colors';
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -21,7 +29,10 @@ class DeckView extends Component {
 
                 <View style={styles.item}>
                     <Text style={styles.title}>{decks[title].title}</Text>
-                    <Text style={styles.questions}>{decks[title].questions.length} {decks[title].questions.length === 1 ? 'card': 'cards'}</Text>
+                    <Text 
+                        style={styles.questions}>
+                            {decks[title].questions.length} {decks[title].questions.length === 1 ? 'card': 'cards'}
+                    </Text>
 
                     <TextButton 
                         styles={styles}

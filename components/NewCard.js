@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import {
-    Button,
     View,
     Text,
     TextInput,
     StyleSheet,
-    TouchableOpacity,
-    KeyboardAvoidingView
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { black, white, orange, gray } from '../utils/colors';
@@ -32,6 +29,7 @@ class NewCard extends Component {
                 question: '',
                 answer: ''
             }));
+            
             // Go back to previous view
             this.props.navigation.dispatch(NavigationActions.back({ key: null }));
         } else {

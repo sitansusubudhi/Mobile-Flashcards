@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { getDecksData, getDecks } from '../utils/api';
-import { AsyncStorage } from 'react-native';
+import { 
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity
+} from 'react-native';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions';
-import { orange, white } from '../utils/colors';
+import { white } from '../utils/colors';
 
 
 const Deck = ({title, questions, onPress }) => (
@@ -88,7 +92,6 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(decks) {
-
     return {
         decks
     }

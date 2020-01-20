@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, Switch, StyleSheet } from 'react-native';
-import { getDecksData } from '../utils/api';
+import {
+    View,
+    Text,
+    Switch,
+    StyleSheet
+} from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { black, purple, white, red, green, orange, gray } from '../utils/colors';
+import { 
+    black,
+    white,
+    red,
+    green,
+    orange,
+    gray
+} from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
 
 const CORRECT = 'Correct';
@@ -11,18 +22,25 @@ const INCORRECT = 'Incorrect';
 
 const ResultView = ({ correct, incorrect, restartQuiz, goBack }) => (
     <View style={styles.container}>
-            <Text style={styles.answer}>No of FlashCards - {correct + incorrect}</Text>
-            <Text style={styles.answer}>Correctly answered - {correct}</Text>
-            <TextButton
-                styles={styles}
-                text={'Restart Quiz'}
-                color={black}
-                onPress={restartQuiz}/>
-            <TextButton
-                styles={styles}
-                text={'Back to Deck'}
-                color={black}
-                onPress={goBack}/>
+        <Text 
+            style={styles.answer}>
+            No of FlashCards - {correct + incorrect}
+        </Text>
+        <Text
+            style={styles.answer}>
+            Correctly answered - {correct}
+        </Text>
+        
+        <TextButton
+            styles={styles}
+            text={'Restart Quiz'}
+            color={black}
+            onPress={restartQuiz}/>
+        <TextButton
+            styles={styles}
+            text={'Back to Deck'}
+            color={black}
+            onPress={goBack}/>
     </View>
 );
 
@@ -95,12 +113,12 @@ class QuizView extends Component {
         }
 
         if (questionId === decks[deckTitle].questions.length) {
-            return <ResultView 
+            return (<ResultView 
                         deckTitle={deckTitle} 
                         correct={correct} 
                         incorrect={incorrect} 
                         restartQuiz={this.restartQuiz}
-                        goBack={this.goBack}/>;
+                        goBack={this.goBack}/>);
         }
 
         const { question, answer } = decks[deckTitle].questions[questionId];
@@ -117,7 +135,11 @@ class QuizView extends Component {
                         <Text style={styles.question}>
                             {question}
                         </Text>
-                        <Text style={{ marginTop: 30 }}>{this.state.showAnswer ? 'Hide Answer' : 'Show Answer'}</Text>
+                        
+                        <Text style={{ marginTop: 30 }}>
+                            {this.state.showAnswer ? 'Hide Answer' : 'Show Answer'}
+                        </Text>
+
                         <Switch
                             style={{ marginBottom: 25 }}
                             value={showAnswer}

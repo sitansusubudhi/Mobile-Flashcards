@@ -1,10 +1,9 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Ionicons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-import { purple, white, black } from '../utils/colors';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { white, black } from '../utils/colors';
 import DeckList from '../components/DeckList';
 import NewDeck from '../components/NewDeck';
 import DeckView from '../components/DeckView';
