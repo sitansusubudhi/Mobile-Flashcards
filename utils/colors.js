@@ -2,6 +2,8 @@
 
 export const purple = '#292477';
 export const gray = '#757575';
+export const lightGray = '#d6d7da';
+export const darkGray = '#333';
 export const white = '#fff';
 export const black = '#000';
 export const red = '#b71845';

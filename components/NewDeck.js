@@ -8,7 +8,7 @@ import {
 import { saveDeckTitle } from '../utils/api';
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
-import { black, gray, white } from '../utils/colors';
+import { black, gray, lightGray, darkGray, white } from '../utils/colors';
 import TextButton from './TextButton';
 
 class NewDeck extends Component {
@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        color: '#333'
+        color: darkGray
     },
     AndroidSubmitBtn: {
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: lightGray,
         padding: 10,
         borderRadius: 7,
         overflow: 'hidden'

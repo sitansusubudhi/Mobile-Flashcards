@@ -17,33 +17,10 @@ import {
 } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
+import ResultView from './ResultView';
 
 const CORRECT = 'Correct';
 const INCORRECT = 'Incorrect';
-
-const ResultView = ({ correct, incorrect, restartQuiz, goBack }) => (
-    <View style={styles.container}>
-        <Text 
-            style={styles.answer}>
-            No of FlashCards - {correct + incorrect}
-        </Text>
-        <Text
-            style={styles.answer}>
-            Correctly answered - {correct}
-        </Text>
-        
-        <TextButton
-            styles={styles}
-            text={'Restart Quiz'}
-            color={black}
-            onPress={restartQuiz}/>
-        <TextButton
-            styles={styles}
-            text={'Back to Deck'}
-            color={black}
-            onPress={goBack}/>
-    </View>
-);
 
 class QuizView extends Component {
 
@@ -130,7 +107,8 @@ class QuizView extends Component {
                         correct={correct} 
                         incorrect={incorrect} 
                         restartQuiz={this.restartQuiz}
-                        goBack={this.goBack}/>);
+                        goBack={this.goBack}
+                        styles={styles}/>);
         }
 
         const { question, answer } = decks[deckTitle].questions[questionId];
