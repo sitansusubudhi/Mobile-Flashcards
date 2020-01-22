@@ -61,7 +61,7 @@ class NewDeck extends Component {
                 </TextInput>
                 <TextButton 
                         styles={styles}
-                        text={'Submit'}
+                        text={'Create Deck'}
                         color={black}
                         onPress={this.handleSubmit}/>
             </KeyboardAvoidingView>

@@ -35,7 +35,7 @@ export function setLocalNotification () {
               // console.log('Local notification ', tomorrow);
 
               tomorrow.setDate(tomorrow.getDate() + 1);
-              tomorrow.setHours(7);
+              tomorrow.setHours(10);
               tomorrow.setMinutes(0);
 
               Notifications.scheduleLocalNotificationAsync(

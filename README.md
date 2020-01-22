@@ -10,15 +10,21 @@ For this application, most of the application’s state is managed by Redux.
 To view the project in your local machine:
 
 * clone this repository using `git clone `
-* install all project dependencies with `yarn`
+* `cd` into the project folder
+* install all project dependencies with `yarn install`
 * start the development server with `yarn start`
 
 This would open the Expo Developer Tools in the browser. To test the app in device, scan the QR Code using the Expo Client app ([Expo Client for Android & iOS](https://expo.io/tools#client)).
 
+Click on the Reload button if you face an error "Could not load exp://* Network response timed out..."
+Change the connection mode to 'Tunnel' and try opening the project in Expo again, if there still exists an error while running on 'LAN'.
 
 ## Testing
 
-This project has been tested on Nokia 7 Plus (Android 10).
+This project has been tested on - 
+
+* Google Pixel 2 XL - Android 9.0 - API 28 (Android Simulator)
+* Nokia 7 Plus (Android 10) (Mobile).
 
 ## Component Hierarchy
 
